@@ -1,0 +1,14 @@
+/artifacts/
+**/bin/
+**/obj/
+.vs/
+
+*.dll
+*.exe
+*.pdb
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.sarif
+*.sarif.json
