@@ -1,3 +1,9 @@
 Synthetic test declaration, not a license grant or verified ownership statement.
 Copyright (c) 2026 Microsoft Corporation.
 No product source was copied to create this fixture.
+
+Fixture: license-claim - root-level legal declaration.
+Preparation places this file at the scenario root as LICENSE.
+The legal-document check detects the declaration above, not source-code logic.
+Expected scenario outcome: Stop (SkipHyenas / StopMDASH).
+The declaration is test data, not proof of ownership or permission to process.

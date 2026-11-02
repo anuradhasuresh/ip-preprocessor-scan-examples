@@ -1,2 +1,8 @@
 Synthetic legal-template fixture, not a license grant.
 SPDX-FileCopyrightText: 2026 Microsoft Corporation
+
+Fixture: license-claim - nested legal-template declaration.
+The legal-document check recognizes the standardized SPDX declaration above
+inside a nested template, not only in a root file named LICENSE.
+Expected scenario outcome: Stop (SkipHyenas / StopMDASH).
+The signal is the declaration, not MIT in the filename. This is not a license grant.

@@ -28,10 +28,6 @@ The script refuses to overwrite an existing output directory. Choose a new
 
 ## Run a scan
 
-**Scan one prepared scenario, not the entire fixture repository.** The whole
-collection deliberately contains blocking declarations, so scanning it cannot
-demonstrate the clean control.
-
 Use your scanner's supported directory or bundle input:
 
 - Directory: `artifacts\inputs\<scenario>`
