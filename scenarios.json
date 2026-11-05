@@ -87,6 +87,8 @@
       "binary": "signed",
       "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
       "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxExpected": {"status": "Incomplete", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxSignatureStatuses": ["Valid"],
       "evidenceKinds": [],
       "requiredRules": [],
       "issueCode": null,
@@ -100,6 +102,8 @@
       "binary": "unsigned",
       "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
       "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxExpected": {"status": "Incomplete", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxSignatureStatuses": ["NotSigned"],
       "evidenceKinds": [],
       "requiredRules": [],
       "issueCode": null,
@@ -113,6 +117,8 @@
       "binary": "tampered",
       "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
       "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxExpected": {"status": "Incomplete", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxSignatureStatuses": ["UnknownError"],
       "evidenceKinds": [],
       "requiredRules": [],
       "issueCode": null,
@@ -126,10 +132,351 @@
       "binary": "combined",
       "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
       "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "linuxExpected": {"status": "Incomplete", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "linuxSignatureStatuses": ["Valid", "NotSigned", "UnknownError"],
       "evidenceKinds": ["MicrosoftLicenseCopyrightClaim", "MicrosoftSourceHeaderClaim", "MicrosoftCatalogOriginClaim"],
       "requiredRules": ["MicrosoftCopyrightDeclaration", "MicrosoftSpdxCopyrightDeclaration", "MicrosoftAuthorshipDeclaration", "ExactCatalogLiteralOrigin"],
       "issueCode": null,
       "signatureStatuses": ["Valid", "NotSigned", "HashMismatch"]
+    },
+    {
+      "id": "body-mention-only",
+      "templates": ["customer", "body-mention"],
+      "origin": null,
+      "invalidText": false,
+      "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null,
+      "evidenceKinds": [],
+      "requiredRules": [],
+      "issueCode": null,
+      "signatureStatuses": []
+    },
+    {
+      "id": "license-code-name",
+      "templates": ["customer", "license-code-name"],
+      "origin": null,
+      "invalidText": false,
+      "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null,
+      "evidenceKinds": [],
+      "requiredRules": [],
+      "issueCode": null,
+      "signatureStatuses": []
+    },
+    {
+      "id": "nested-legal-only",
+      "templates": ["customer", "nested-legal"],
+      "origin": null,
+      "invalidText": false,
+      "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": null,
+      "evidenceKinds": ["MicrosoftLicenseCopyrightClaim"],
+      "requiredRules": ["MicrosoftCopyrightDeclaration"],
+      "issueCode": null,
+      "signatureStatuses": []
+    },
+    {
+      "id": "origin-lookalike",
+      "templates": ["customer"],
+      "origin": "https://github.com/microsoft/vscode-not-a-catalog-entry.git",
+      "invalidText": false,
+      "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null,
+      "evidenceKinds": [],
+      "requiredRules": [],
+      "issueCode": null,
+      "signatureStatuses": []
+    },
+    {
+      "id": "header-with-incomplete-text",
+      "templates": ["customer", "headers"],
+      "origin": null,
+      "invalidText": true,
+      "binary": null,
+      "expected": {"status": "Unsupported", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": null,
+      "evidenceKinds": ["MicrosoftSourceHeaderClaim"],
+      "requiredRules": ["MicrosoftCopyrightDeclaration", "MicrosoftSpdxCopyrightDeclaration", "MicrosoftAuthorshipDeclaration"],
+      "issueCode": "InvalidTextEncoding",
+      "signatureStatuses": []
+    },
+    {
+      "id": "catalog-only-binary",
+      "templates": ["customer"],
+      "origin": null,
+      "invalidText": false,
+      "binary": "catalog-only",
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxExpected": {"status": "Incomplete", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxSignatureStatuses": ["NotSigned"],
+      "evidenceKinds": [],
+      "requiredRules": [],
+      "issueCode": null,
+      "signatureStatuses": ["Valid"]
+    },
+    {
+      "id": "unsigned-uppercase-dll",
+      "templates": ["customer"],
+      "origin": null,
+      "invalidText": false,
+      "binary": "unsigned-uppercase",
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxExpected": {"status": "Incomplete", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "linuxSignatureStatuses": ["NotSigned"],
+      "evidenceKinds": [],
+      "requiredRules": [],
+      "issueCode": null,
+      "signatureStatuses": ["NotSigned"]
+    },
+    {
+      "id": "header-with-unsigned-binary",
+      "templates": ["customer", "headers"],
+      "origin": null,
+      "invalidText": false,
+      "binary": "unsigned",
+      "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "linuxExpected": {"status": "Incomplete", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "linuxSignatureStatuses": ["NotSigned"],
+      "evidenceKinds": ["MicrosoftSourceHeaderClaim"],
+      "requiredRules": ["MicrosoftCopyrightDeclaration", "MicrosoftSpdxCopyrightDeclaration", "MicrosoftAuthorshipDeclaration"],
+      "issueCode": null,
+      "signatureStatuses": ["NotSigned"]
+    },
+    {
+      "id": "hash-exact",
+      "templates": ["catalog-reference"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "exact", "status": "Completed", "matches": 1, "artifactPath": "Lookup.cs", "microsoftOwnerClaim": true, "conflictingOwnership": false}
+    },
+    {
+      "id": "hash-renamed",
+      "templates": ["catalog-reference"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "renamed", "status": "Completed", "matches": 1, "artifactPath": "Renamed.dat", "microsoftOwnerClaim": true, "conflictingOwnership": false}
+    },
+    {
+      "id": "hash-edited",
+      "templates": ["catalog-reference"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "edited", "status": "Completed", "matches": 0}
+    },
+    {
+      "id": "hash-line-endings",
+      "templates": ["catalog-reference"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "line-endings", "status": "Completed", "matches": 0}
+    },
+    {
+      "id": "hash-snippet-only",
+      "templates": ["catalog-snippet"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "snippet", "status": "Completed", "matches": 0}
+    },
+    {
+      "id": "hash-missing-catalog",
+      "templates": ["catalog-reference"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "missing", "status": "Unavailable", "matches": 0}
+    },
+    {
+      "id": "hash-invalid-catalog",
+      "templates": ["catalog-reference"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "invalid", "status": "Unavailable", "matches": 0}
+    },
+    {
+      "id": "hash-empty-catalog",
+      "templates": ["catalog-reference"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "empty", "status": "Completed", "matches": 0}
+    },
+    {
+      "id": "hash-conflicting-owners",
+      "templates": ["catalog-reference"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "conflict", "status": "Completed", "matches": 1, "artifactPath": "Lookup.cs", "microsoftOwnerClaim": null, "conflictingOwnership": true}
+    },
+    {
+      "id": "hash-oversized-catalog",
+      "templates": ["catalog-reference"], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "oversized", "status": "Unavailable", "matches": 0}
+    },
+    {
+      "id": "public-microsoft-powershellforgithub",
+      "templates": [],
+      "origin": null,
+      "invalidText": false,
+      "binary": null,
+      "publicSource": {
+        "repository": "microsoft/PowerShellForGitHub",
+        "commit": "fd4fa65f23ca30f18f85312a85348e660c287a9c",
+        "archiveSha256": "f5b7dae55fdd932f4460762e794849fe1f1e6c6083e36509dfbcba676ce7fb15",
+        "license": "MIT",
+        "licenseFile": "LICENSE"
+      },
+      "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": null,
+      "evidenceKinds": ["MicrosoftLicenseCopyrightClaim", "MicrosoftSourceHeaderClaim"],
+      "requiredRules": ["MicrosoftCopyrightDeclaration"],
+      "issueCode": null,
+      "signatureStatuses": []
+    },
+    {
+      "id": "public-serilog",
+      "templates": [],
+      "origin": null,
+      "invalidText": false,
+      "binary": null,
+      "publicSource": {
+        "repository": "serilog/serilog",
+        "commit": "43105b35095337d77f022561a8f2d3db2f9a7937",
+        "archiveSha256": "b926351ea66427feabfbb7cc3bd5da600fdb2b4bb8f5c5713effdf463ec90077",
+        "license": "Apache-2.0",
+        "licenseFile": "LICENSE"
+      },
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null,
+      "evidenceKinds": [],
+      "requiredRules": [],
+      "issueCode": "InvalidTextEncoding",
+      "signatureStatuses": []
+    },
+    {
+      "id": "public-hash-exact",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "publicReference": {"case": "public-microsoft-powershellforgithub", "path": "GitHubMiscellaneous.ps1", "catalogCase": "public-microsoft-powershellforgithub", "catalogPath": "GitHubMiscellaneous.ps1"},
+      "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "exact", "status": "Completed", "matches": 1, "artifactPath": "GitHubMiscellaneous.ps1", "microsoftOwnerClaim": true, "conflictingOwnership": false}
+    },
+    {
+      "id": "public-hash-renamed",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "publicReference": {"case": "public-microsoft-powershellforgithub", "path": "GitHubMiscellaneous.ps1", "catalogCase": "public-microsoft-powershellforgithub", "catalogPath": "GitHubMiscellaneous.ps1"},
+      "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "renamed", "status": "Completed", "matches": 1, "artifactPath": "Renamed.dat", "microsoftOwnerClaim": true, "conflictingOwnership": false}
+    },
+    {
+      "id": "public-hash-edited",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "publicReference": {"case": "public-microsoft-powershellforgithub", "path": "GitHubMiscellaneous.ps1", "catalogCase": "public-microsoft-powershellforgithub", "catalogPath": "GitHubMiscellaneous.ps1"},
+      "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "edited", "status": "Completed", "matches": 0}
+    },
+    {
+      "id": "public-hash-line-endings",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "publicReference": {"case": "public-microsoft-powershellforgithub", "path": "GitHubMiscellaneous.ps1", "catalogCase": "public-microsoft-powershellforgithub", "catalogPath": "GitHubMiscellaneous.ps1"},
+      "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "line-endings", "status": "Completed", "matches": 0}
+    },
+    {
+      "id": "public-hash-snippet-only",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "publicReference": {"case": "public-microsoft-powershellforgithub", "path": "GitHubMiscellaneous.ps1", "catalogCase": "public-microsoft-powershellforgithub", "catalogPath": "GitHubMiscellaneous.ps1"},
+      "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "snippet", "status": "Completed", "matches": 0}
+    },
+    {
+      "id": "public-hash-serilog-control",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "publicReference": {"case": "public-serilog", "path": "src/Serilog/Log.cs", "catalogCase": "public-microsoft-powershellforgithub", "catalogPath": "GitHubMiscellaneous.ps1"},
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "referenceCatalog": {"variant": "unmatched", "status": "Completed", "matches": 0}
+    },
+    {
+      "id": "content-native-pe",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "binaryContent": {"variant": "native", "sourceFile": "native.exe", "kind": "NativePe", "checkStatus": "Completed", "signatureAssessment": true}
+    },
+    {
+      "id": "content-managed-assembly",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "binaryContent": {"variant": "managed", "sourceFile": "managed.dll", "kind": "ManagedPe", "checkStatus": "Completed", "signatureAssessment": true}
+    },
+    {
+      "id": "content-managed-netmodule",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": {"status": "Unsupported", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": ["NotSigned"],
+      "binaryContent": {"variant": "module", "sourceFile": "module.netmodule", "kind": "ManagedPe", "checkStatus": "Completed", "signatureAssessment": true}
+    },
+    {
+      "id": "content-truncated-pe",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Failed", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [],
+      "issueCode": "binary-structure-malformed", "signatureStatuses": [],
+      "binaryContent": {"variant": "truncated", "sourceFile": "truncated.dat", "kind": "Malformed", "checkStatus": "Failed", "signatureAssessment": false}
+    },
+    {
+      "id": "content-invalid-pe-offset",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Failed", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [],
+      "issueCode": "binary-structure-malformed", "signatureStatuses": [],
+      "binaryContent": {"variant": "invalid-offset", "sourceFile": "invalid-offset.dat", "kind": "Malformed", "checkStatus": "Failed", "signatureAssessment": false}
+    },
+    {
+      "id": "content-section-limit",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Incomplete", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [],
+      "issueCode": "binary-inspection-limit", "signatureStatuses": [],
+      "binaryContent": {"variant": "section-limit", "sourceFile": "section-limit.dat", "kind": "LimitExceeded", "checkStatus": "Incomplete", "signatureAssessment": false}
+    },
+    {
+      "id": "content-standalone-metadata",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Unsupported", "nativeRecommendation": "ReviewRequired", "disposition": "Unassessed"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [],
+      "issueCode": "binary-managed-format-unsupported", "signatureStatuses": [],
+      "binaryContent": {"variant": "metadata", "sourceFile": "metadata.dat", "kind": "UnsupportedManaged", "checkStatus": "Unsupported", "signatureAssessment": false}
+    },
+    {
+      "id": "content-text-control",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "RunHyenas", "disposition": "ContinueMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": [], "requiredRules": [], "issueCode": null, "signatureStatuses": [],
+      "binaryContent": {"variant": "text-control", "sourceFile": "text-control.cs", "kind": "NotPe", "checkStatus": "NotApplicable", "signatureAssessment": false}
+    },
+    {
+      "id": "content-text-claim",
+      "templates": [], "origin": null, "invalidText": false, "binary": null,
+      "expected": {"status": "Completed", "nativeRecommendation": "SkipHyenas", "disposition": "StopMDASH"},
+      "nonWindowsExpected": null, "evidenceKinds": ["MicrosoftSourceHeaderClaim", "MicrosoftLicenseCopyrightClaim"],
+      "requiredRules": ["MicrosoftCopyrightDeclaration"], "issueCode": null, "signatureStatuses": [],
+      "binaryContent": {"variant": "text-claim", "sourceFile": "text-claim.cs", "kind": "NotPe", "checkStatus": "NotApplicable", "signatureAssessment": false}
     }
   ]
 }
